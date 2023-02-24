@@ -25,6 +25,9 @@ end
 
 -- Have packer use a popup window
 packer.init({
+    -- git = {
+    --   default_url_format = 'https://hub.nuaa.cf/%s'
+    -- },
     display = {
         open_fn = function()
             return require("packer.util").float({
@@ -52,6 +55,7 @@ return packer.startup(function(use)
     use {"lukas-reineke/indent-blankline.nvim"}
     use {"goolord/alpha-nvim"}
     use {"folke/which-key.nvim"}
+    use {"khaveesh/vim-fish-syntax"}
 
     -- Colorschemes
     use {"folke/tokyonight.nvim"}
