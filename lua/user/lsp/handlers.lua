@@ -24,6 +24,7 @@ M.setup = function()
 
 	local config = {
 		virtual_text = false, -- disable virtual text
+    single_file_support = true,
 		signs = {
 			active = signs, -- show signs
 		},
@@ -72,11 +73,13 @@ local function lsp_keymaps(bufnr)
 end
 
 M.on_attach = function(client, bufnr)
+  -- Enable completion triggered by <c-x><c-o>
+  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 	if client.name == "tsserver" then
 		client.server_capabilities.documentFormattingProvider = false
 	end
 
-	if client.name == "sumneko_lua" then
+	if client.name == "lua_ls" then
 		client.server_capabilities.documentFormattingProvider = false
 	end
 

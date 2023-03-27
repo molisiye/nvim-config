@@ -21,7 +21,6 @@ end
 
 -- Install your plugins here
 return packer.setup({
-    "wbthomason/packer.nvim",
     "nvim-lua/plenary.nvim",
     "windwp/nvim-autopairs",
     "numToStr/Comment.nvim",
@@ -33,7 +32,6 @@ return packer.setup({
     "nvim-lualine/lualine.nvim",
     "akinsho/toggleterm.nvim",
     "ahmedkhalf/project.nvim",
-    "lewis6991/impatient.nvim",
     "lukas-reineke/indent-blankline.nvim",
     "goolord/alpha-nvim",
     "folke/which-key.nvim",
@@ -72,5 +70,5 @@ return packer.setup({
 
     -- Git
     "lewis6991/gitsigns.nvim",
-}) 
+})
 
