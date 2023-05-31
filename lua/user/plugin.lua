@@ -13,14 +13,20 @@ vim.opt.rtp:prepend(lazypath)
 
 
 -- Use a protected call so we don't error out on first use
-local status_ok, packer = pcall(require, "lazy")
+local status_ok, lazy = pcall(require, "lazy")
 if not status_ok then
     return
 end
 
 
 -- Install your plugins here
-return packer.setup({
+return lazy.setup({
+    {"alker0/chezmoi.vim",
+      lazy =  false,
+      init = function()
+        vim.g['chezmoi#use_tmp_buffer'] = true
+      end
+    },
     "nvim-lua/plenary.nvim",
     "windwp/nvim-autopairs",
     "numToStr/Comment.nvim",
