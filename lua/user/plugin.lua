@@ -67,6 +67,7 @@ return lazy.setup({
     "jose-elias-alvarez/null-ls.nvim",
     "RRethy/vim-illuminate",
     "ii14/emmylua-nvim",
+    "folke/neodev.nvim",
 
     -- Telescope
     "nvim-telescope/telescope.nvim",
