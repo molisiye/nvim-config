@@ -34,6 +34,7 @@ return lazy.setup({
     "kyazdani42/nvim-web-devicons",
     "kyazdani42/nvim-tree.lua",
     "akinsho/bufferline.nvim",
+    "nanozuki/tabby.nvim",
     "moll/vim-bbye",
     "nvim-lualine/lualine.nvim",
     "akinsho/toggleterm.nvim",
