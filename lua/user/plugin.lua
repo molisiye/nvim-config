@@ -27,12 +27,19 @@ return lazy.setup({
         vim.g['chezmoi#use_tmp_buffer'] = true
       end
     },
+  {
+    "nvim-neo-tree/neo-tree.nvim",
+    branch = "v3.x",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+      "MunifTanjim/nui.nvim"
+    }
+  },
     "nvim-lua/plenary.nvim",
     "windwp/nvim-autopairs",
     "numToStr/Comment.nvim",
     "JoosepAlviste/nvim-ts-context-commentstring",
-    "kyazdani42/nvim-web-devicons",
-    "kyazdani42/nvim-tree.lua",
     "akinsho/bufferline.nvim",
     "nanozuki/tabby.nvim",
     "moll/vim-bbye",

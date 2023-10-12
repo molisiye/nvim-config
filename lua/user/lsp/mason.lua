@@ -30,6 +30,7 @@ require("mason-lspconfig").setup({
   automatic_installation = true,
 })
 
+
 local lspconfig_status_ok, lspconfig = pcall(require, "lspconfig")
 if not lspconfig_status_ok then
   return
@@ -38,9 +39,12 @@ end
 local opts = {
 }
 
+local function on_attach(client, bufnr)
+  require("user.lsp.handlers").on_attach(client, bufnr)
+end
 for _, server in pairs(servers) do
   opts = {
-    on_attach = require("user.lsp.handlers").on_attach,
+    on_attach = on_attach,
     capabilities = require("user.lsp.handlers").capabilities,
     single_file_support = true,
   }
@@ -53,3 +57,11 @@ for _, server in pairs(servers) do
   end
   lspconfig[server].setup(opts)
 end
+
+lspconfig["serve_d"].setup({
+  -- disable default formatting
+  capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities()),
+  on_attach = function(client)
+    client.server_capabilities.documentFormattingProvider = false
+  end,
+})
