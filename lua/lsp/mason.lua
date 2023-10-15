@@ -40,18 +40,18 @@ local opts = {
 }
 
 local function on_attach(client, bufnr)
-  require("user.lsp.handlers").on_attach(client, bufnr)
+  require("lsp.handlers").on_attach(client, bufnr)
 end
 for _, server in pairs(servers) do
   opts = {
     on_attach = on_attach,
-    capabilities = require("user.lsp.handlers").capabilities,
+    capabilities = require("lsp.handlers").capabilities,
     single_file_support = true,
   }
 
   server = vim.split(server, "@")[1]
 
-  local require_ok, conf_opts = pcall(require, "user.lsp.settings." .. server)
+  local require_ok, conf_opts = pcall(require, "lsp.settings." .. server)
   if require_ok then
     opts = vim.tbl_deep_extend("force", conf_opts, opts)
   end

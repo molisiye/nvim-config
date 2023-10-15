@@ -10,10 +10,10 @@ end
 
 require("luasnip/loaders/from_vscode").lazy_load()
 
-local check_backspace = function()
-  local col = vim.fn.col "." - 1
-  return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
-end
+--local check_backspace = function()
+--  local col = vim.fn.col "." - 1
+--  return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
+--end
 
 --   פּ ﯟ   some other good icons
 local kind_icons = {
@@ -45,7 +45,8 @@ local kind_icons = {
 }
 -- find more here: https://www.nerdfonts.com/cheat-sheet
 
-cmp.setup {
+---@diagnostic disable-next-line: missing-fields
+cmp.setup({
   snippet = {
     expand = function(args)
       luasnip.lsp_expand(args.body) -- For `luasnip` users.
@@ -72,8 +73,6 @@ cmp.setup {
         luasnip.expand()
       elseif luasnip.expand_or_jumpable() then
         luasnip.expand_or_jump()
-      elseif check_backspace() then
-        fallback()
       else
         fallback()
       end
@@ -109,23 +108,25 @@ cmp.setup {
       return vim_item
     end,
   },
-  sources = {
+  sources = cmp.config.sources({
     { name = "nvim_lsp" },
+    { name = "vsnip" },
+    -- document-symbol
+    {name = "nvim_lsp_document_symbol"},
+    -- signature-help
+    {name = "nvim_lsp_signature_help"},
     { name = "luasnip" },
-    { name = "buffer" },
-    { name = "path" },
-  },
+  },{{ name = "buffer"}}),
   confirm_opts = {
     behavior = cmp.ConfirmBehavior.Replace,
     select = false,
   },
   window = {
-    documentation = {
-      border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-    },
+    completion = cmp.config.window.bordered(),
+    documention = cmp.config.window.bordered()
   },
   experimental = {
     ghost_text = false,
     native_menu = false,
   },
-}
+})

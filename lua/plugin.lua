@@ -3,7 +3,7 @@ local fn = vim.fn
 -- Automatically install packer
 local lazypath = fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
-    fn.system({"git", "clone", "--filter=blob:none", 
+    fn.system({"git", "clone", "--filter=blob:none",
     "https://github.com/folke/lazy.nvim",
     "--branch=stable", --latest stable release
     lazypath
@@ -15,12 +15,15 @@ vim.opt.rtp:prepend(lazypath)
 -- Use a protected call so we don't error out on first use
 local status_ok, lazy = pcall(require, "lazy")
 if not status_ok then
+    vim.notify("not found lazy")
     return
 end
 
 
 -- Install your plugins here
 return lazy.setup({
+  -- manage itself
+  "folke/lazy.nvim",
     {"alker0/chezmoi.vim",
       lazy =  false,
       init = function()
@@ -29,24 +32,26 @@ return lazy.setup({
     },
   {
     "nvim-neo-tree/neo-tree.nvim",
-    branch = "v3.x",
-    dependencies = {
+          branch = "v3.x",
+          dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
       "MunifTanjim/nui.nvim"
     }
   },
-    "nvim-lua/plenary.nvim",
+  -- symbol line
+  {
+  "stevearc/aerial.nvim",
+    event = "VeryLazy"
+  },
     "windwp/nvim-autopairs",
     "numToStr/Comment.nvim",
     "JoosepAlviste/nvim-ts-context-commentstring",
-    "akinsho/bufferline.nvim",
     "nanozuki/tabby.nvim",
     "moll/vim-bbye",
     "nvim-lualine/lualine.nvim",
     "akinsho/toggleterm.nvim",
-    "ahmedkhalf/project.nvim",
-    "lukas-reineke/indent-blankline.nvim",
+    {"lukas-reineke/indent-blankline.nvim", main="ibl"},
     "goolord/alpha-nvim",
     "folke/which-key.nvim",
     "khaveesh/vim-fish-syntax",
@@ -54,16 +59,17 @@ return lazy.setup({
     -- Colorschemes
     "folke/tokyonight.nvim",
     "lunarvim/darkplus.nvim",
+  "neanias/everforest-nvim",
+  "neanias/everforest-nvim",
     "neanias/everforest-nvim",
 
     -- Cmp 
-    "hrsh7th/nvim-cmp",
-    "hrsh7th/cmp-buffer",
-    "hrsh7th/cmp-path",
-    "saadparwaiz1/cmp_luasnip",
-    "hrsh7th/cmp-nvim-lsp",
-    "hrsh7th/cmp-nvim-lua",
-
+  {"hrsh7th/nvim-cmp",
+          dependencies = {
+        "hrsh7th/cmp-nvim-lsp",
+      },
+    event = "VeryLazy"
+    },
     -- Snippets
     "L3MON4D3/LuaSnip",
     "rafamadriz/friendly-snippets",
@@ -72,7 +78,6 @@ return lazy.setup({
     "neovim/nvim-lspconfig",
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
-    "jose-elias-alvarez/null-ls.nvim",
     "RRethy/vim-illuminate",
     "ii14/emmylua-nvim",
     "folke/neodev.nvim",
@@ -84,6 +89,34 @@ return lazy.setup({
     "nvim-treesitter/nvim-treesitter",
 
     -- Git
-    "lewis6991/gitsigns.nvim",
+  {"lewis6991/gitsigns.nvim",
+        event = "VeryLazy"
+  },
+  {
+    "kevinhwang91/nvim-ufo",
+    dependencies = {
+      "kevinhwang91/promise-async",
+      {
+        "luukvbaal/statuscol.nvim",
+        config = function()
+          local builtin = require("statuscol.builtin")
+          require("statuscol").setup({
+            relculright = true,
+            segments = {
+              {text = {builtin.foldfunc}, click = "v:lua.ScFa"},
+              {text = {"%s"}, click = "v:lua.ScSa"},
+              {text = {builtin.lnumfunc, " "}, click = "v:lua.ScLa"}
+            }
+          })
+        end
+      }
+    },
+    event = "BufReadPost"
+  },
+  {"stevearc/conform.nvim", opts = {}},
+  {
+    "folke/trouble.nvim",
+    event = "VeryLazy",
+  },
 })
 
