@@ -92,5 +92,16 @@ telescope.setup {
     --   extension_config_key = value,
     -- }
     -- please take a look at the readme of the extension you want to configure
+        aerial = {
+            -- Display symbols as <root>.<parent>.<symbol>
+            show_nesting = {
+                ["_"] = false, -- This key will be the default
+                json = true, -- You can set the option for specific filetypes
+                yaml = true
+            }
+        }
   },
 }
+
+-- Telescope extensions
+telescope.load_extension("aerial")
