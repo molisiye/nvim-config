@@ -1,5 +1,6 @@
 {
   "Comment.nvim": { "branch": "master", "commit": "0236521ea582747b58869cb72f70ccfa967d2e89" },
+  "LspUI.nvim": { "branch": "main", "commit": "0c5b682118f8d6d69cdf45d70fbad1bdec50e285" },
   "LuaSnip": { "branch": "master", "commit": "0df29db3543837f8b41597f2640397c5ec792b7b" },
   "aerial.nvim": { "branch": "master", "commit": "ffdda791c0d739154a73af09e4ed14c9147a354b" },
   "alpha-nvim": { "branch": "main", "commit": "234822140b265ec4ba3203e3e0be0e0bb826dff5" },
@@ -14,6 +15,7 @@
   "conform.nvim": { "branch": "master", "commit": "1281e26948fc06994e0e0cdcaafdd9bbd28929e7" },
   "darkplus.nvim": { "branch": "master", "commit": "7c236649f0617809db05cd30fb10fed7fb01b83b" },
   "everforest-nvim": { "branch": "main", "commit": "64f290dd2d00ae54132589b55bf9454370eb7cd8" },
+  "fidget.nvim": { "branch": "legacy", "commit": "90c22e47be057562ee9566bad313ad42d622c1d3" },
   "friendly-snippets": { "branch": "main", "commit": "43727c2ff84240e55d4069ec3e6158d74cb534b6" },
   "gitsigns.nvim": { "branch": "main", "commit": "ff01d34daaed72f271a8ffa088a7e839a60c640f" },
   "indent-blankline.nvim": { "branch": "master", "commit": "d747910c022525def3ed6f2ecce477a5956f3992" },

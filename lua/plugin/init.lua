@@ -52,6 +52,24 @@ lazy.setup({
 			require("plugin.aerial")
 		end,
 	},
+	-- lsp progress
+	{
+		"j-hui/fidget.nvim",
+		branch = "legacy",
+		event = "VeryLazy",
+		config = function()
+			require("plugin.fidget")
+		end,
+	},
+	-- lspui
+	{
+		"jinzhongjia/LspUI.nvim",
+        branch = "main",
+		event = "VeryLazy",
+		config = function()
+			require("plugin.LspUI")
+		end,
+	},
 	{
 		"numToStr/Comment.nvim",
 		dependencies = { "JoosepAlviste/nvim-ts-context-commentstring" },
@@ -205,9 +223,9 @@ lazy.setup({
 			},
 		},
 		event = "BufReadPost",
-        config = function ()
-            require("plugin.nvim-ufo")
-        end
+		config = function()
+			--require("plugin.nvim-ufo")
+		end,
 	},
 	{
 		"stevearc/conform.nvim",

@@ -8,8 +8,8 @@ local capabilities = cmp_nvim_lsp.default_capabilities()
 
 -- for ufo
 capabilities.textDocument.foldingRange = {
-	dynamicRegistration = false,
-	lineFoldingOnly = true,
+--	dynamicRegistration = false,
+--	lineFoldingOnly = true,
 }
 
 local default_config = function()

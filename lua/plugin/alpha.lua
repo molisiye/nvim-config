@@ -5,12 +5,16 @@ end
 
 local dashboard = require("alpha.themes.dashboard")
 dashboard.section.header.val = {
-	[[                               __                ]],
-	[[  ___     ___    ___   __  __ /\_\    ___ ___    ]],
-	[[ / _ `\  / __`\ / __`\/\ \/\ \\/\ \  / __` __`\  ]],
-	[[/\ \/\ \/\  __//\ \_\ \ \ \_/ |\ \ \/\ \/\ \/\ \ ]],
-	[[\ \_\ \_\ \____\ \____/\ \___/  \ \_\ \_\ \_\ \_\]],
-	[[ \/_/\/_/\/____/\/___/  \/__/    \/_/\/_/\/_/\/_/]],
+[[ ███▄    █ ▓█████  ▒█████   ██▒   █▓ ██▓ ███▄ ▄███▓]],
+[[ ██ ▀█   █ ▓█   ▀ ▒██▒  ██▒▓██░   █▒▓██▒▓██▒▀█▀ ██▒]],
+[[▓██  ▀█ ██▒▒███   ▒██░  ██▒ ▓██  █▒░▒██▒▓██    ▓██░]],
+[[▓██▒  ▐▌██▒▒▓█  ▄ ▒██   ██░  ▒██ █░░░██░▒██    ▒██ ]],
+[[▒██░   ▓██░░▒████▒░ ████▓▒░   ▒▀█░  ░██░▒██▒   ░██▒]],
+[[░ ▒░   ▒ ▒ ░░ ▒░ ░░ ▒░▒░▒░    ░ ▐░  ░▓  ░ ▒░   ░  ░]],
+[[░ ░░   ░ ▒░ ░ ░  ░  ░ ▒ ▒░    ░ ░░   ▒ ░░  ░      ░]],
+[[   ░   ░ ░    ░   ░ ░ ░ ▒       ░░   ▒ ░░      ░   ]],
+[[         ░    ░  ░    ░ ░        ░   ░         ░   ]],
+[[                                ░                  ]]
 }
 dashboard.section.buttons.val = {
 	dashboard.button("f", "󰈞  Find file", ":Telescope find_files <CR>"),
@@ -28,8 +32,12 @@ local function footer()
 	-- local fortune = handle:read("*a")
 	-- handle:close()
 	-- return fortune
-	return "chrisatmachine.com"
+	--return "chrisatmachine.com"
+     local stats = require("lazy").stats()
+    --local ms = (math.floor(stats.startuptime* 100 + 0.5)/100)
+    return stats.count .. " plugins is loaded."
 end
+
 
 dashboard.section.footer.val = footer()
 
