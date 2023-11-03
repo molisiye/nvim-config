@@ -5,16 +5,19 @@ if not status then
 end
 
 neodev.setup({
-    runtime = true,
-	override = function(_, library)
-		library.enabled = true
-		library.plugins = true
-	end,
+	-- override = function(_, library)
+	-- 	library.enabled = true
+	-- 	library.plugins = true
+	-- end,
 })
 
 return {
 	settings = {
 		Lua = {
+            runtime = {
+                version = "LuaJIT",
+                pathStrict = true
+            },
 			hint = {
 				enable = true,
 				arrayIndex = "Enable",

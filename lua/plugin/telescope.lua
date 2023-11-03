@@ -1,107 +1,90 @@
-local status_ok, telescope = pcall(require, "telescope")
-if not status_ok then
-  return
-end
+return {
+	"nvim-telescope/telescope.nvim",
+	dependencies = {
+		"nvim-lua/plenary.nvim",
+		"nvim-lua/popup.nvim",
+		"nvim-telescope/telescope-fzy-native.nvim",
+		"nvim-telescope/telescope-live-grep-args.nvim",
+		"nvim-telescope/telescope-dap.nvim",
+		"benfowler/telescope-luasnip.nvim",
+		"debugloop/telescope-undo.nvim",
+	},
+	config = function()
+		local telescope = require("telescope")
+		local function flash(prompt_bufnr)
+			require("flash").jump({
+				pattern = "^",
+				label = { after = { 0, 0 } },
+				search = {
+					mode = "search",
+					exclude = {
+						function(win)
+							return vim.bo[vim.api.nvim_win_get_buf(win)].filetype ~= "TelescopeResults"
+						end,
+					},
+				},
+				action = function(match)
+					local picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
+					picker:set_selection(match.ops[1] - 1)
+				end,
+			})
+		end
 
-local actions = require "telescope.actions"
+		telescope.setup({
+			defaults = {
+				prompt_prefix = " ",
+				selection_caret = " ",
+				path_display = { "smart" },
+				mappings = {
+					n = { s = flash },
+					i = { ["<c-s>"] = flash },
+				},
+			},
+			pickers = {
+				-- Default configuration for builtin pickers goes here:
+				-- picker_name = {
+				--   picker_config_key = value,
+				--   ...
+				-- }
+				-- Now the picker_config_key will be applied every time you call this
+				-- builtin picker
+				find_files = { theme = "ivy" },
+				oldfiles = { theme = "ivy" },
+			},
+			extensions = {
+				-- Your extension configuration goes here:
+				-- extension_name = {
+				--   extension_config_key = value,
+				-- }
+				-- please take a look at the readme of the extension you want to configure
+				aerial = {
+					-- Display symbols as <root>.<parent>.<symbol>
+					show_nesting = {
+						["_"] = false, -- This key will be the default
+						json = true, -- You can set the option for specific filetypes
+						yaml = true,
+					},
+				},
+				live_grep_args = { theme = "dropdown" },
+			},
+		})
 
-telescope.setup {
-  defaults = {
+		-- Telescope extensions
+		local extensions = {
+			"dap",
+			"aerial",
+			"fzy_native",
+			"notify",
+			"live_grep_args",
+			"luasnip",
+		}
 
-    prompt_prefix = " ",
-    selection_caret = " ",
-    path_display = { "smart" },
-
-    mappings = {
-      i = {
-        ["<C-n>"] = actions.cycle_history_next,
-        ["<C-p>"] = actions.cycle_history_prev,
-
-        ["<C-j>"] = actions.move_selection_next,
-        ["<C-k>"] = actions.move_selection_previous,
-
-        ["<C-c>"] = actions.close,
-
-        ["<Down>"] = actions.move_selection_next,
-        ["<Up>"] = actions.move_selection_previous,
-
-        ["<CR>"] = actions.select_default,
-        ["<C-x>"] = actions.select_horizontal,
-        ["<C-v>"] = actions.select_vertical,
-        ["<C-t>"] = actions.select_tab,
-
-        ["<C-u>"] = actions.preview_scrolling_up,
-        ["<C-d>"] = actions.preview_scrolling_down,
-
-        ["<PageUp>"] = actions.results_scrolling_up,
-        ["<PageDown>"] = actions.results_scrolling_down,
-
-        ["<Tab>"] = actions.toggle_selection + actions.move_selection_worse,
-        ["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
-        ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
-        ["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
-        ["<C-l>"] = actions.complete_tag,
-        ["<C-_>"] = actions.which_key, -- keys from pressing <C-/>
-      },
-
-      n = {
-        ["<esc>"] = actions.close,
-        ["<CR>"] = actions.select_default,
-        ["<C-x>"] = actions.select_horizontal,
-        ["<C-v>"] = actions.select_vertical,
-        ["<C-t>"] = actions.select_tab,
-
-        ["<Tab>"] = actions.toggle_selection + actions.move_selection_worse,
-        ["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
-        ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
-        ["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
-
-        ["j"] = actions.move_selection_next,
-        ["k"] = actions.move_selection_previous,
-        ["H"] = actions.move_to_top,
-        ["M"] = actions.move_to_middle,
-        ["L"] = actions.move_to_bottom,
-
-        ["<Down>"] = actions.move_selection_next,
-        ["<Up>"] = actions.move_selection_previous,
-        ["gg"] = actions.move_to_top,
-        ["G"] = actions.move_to_bottom,
-
-        ["<C-u>"] = actions.preview_scrolling_up,
-        ["<C-d>"] = actions.preview_scrolling_down,
-
-        ["<PageUp>"] = actions.results_scrolling_up,
-        ["<PageDown>"] = actions.results_scrolling_down,
-
-        ["?"] = actions.which_key,
-      },
-    },
-  },
-  pickers = {
-    -- Default configuration for builtin pickers goes here:
-    -- picker_name = {
-    --   picker_config_key = value,
-    --   ...
-    -- }
-    -- Now the picker_config_key will be applied every time you call this
-    -- builtin picker
-  },
-  extensions = {
-    -- Your extension configuration goes here:
-    -- extension_name = {
-    --   extension_config_key = value,
-    -- }
-    -- please take a look at the readme of the extension you want to configure
-        aerial = {
-            -- Display symbols as <root>.<parent>.<symbol>
-            show_nesting = {
-                ["_"] = false, -- This key will be the default
-                json = true, -- You can set the option for specific filetypes
-                yaml = true
-            }
-        }
-  },
+		for _, ext in ipairs(extensions) do
+			local ok = pcall(telescope.load_extension, ext)
+			if not ok then
+				vim.print("Failed to load telescope extension: " .. ext)
+			end
+		end
+	end,
+    cmd={"Telescope"}
 }
-
--- Telescope extensions
-telescope.load_extension("aerial")

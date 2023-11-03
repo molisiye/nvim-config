@@ -1,3 +1,8 @@
+local custome = require "custome" 
+
 require "options"
+require "manager"
 require "keymaps"
-require "plugin"
+-- require "whichkey"
+
+vim.cmd.colorscheme(custome.theme)

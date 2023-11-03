@@ -1,4 +1,5 @@
 local options = {
+
 	backup = false, -- creates a backup file
 	clipboard = "unnamedplus", -- allows neovim to access the system clipboard
 	cmdheight = 2, -- more space in the neovim command line for displaying messages
@@ -41,6 +42,11 @@ local options = {
 for k, v in pairs(options) do
 	vim.opt[k] = v
 end
+
+--Remap space as leader key
+--keymap("", "<Space>", "<Nop>")
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 
 -- vim.opt.shortmess = "ilmnrx"                        -- flags to shorten vim messages, see :help 'shortmess'
 vim.opt.shortmess:append("c") -- don't give |ins-completion-menu| messages
