@@ -4,6 +4,11 @@ function M.keymap(mode, lhs, rhs, opt)
 	vim.keymap.set(mode, lhs, rhs, opt)
 end
 
+function M.firstToUpper(str)
+    return (str:gsub("^%l", string.upper))
+end
+
+-- copy from astronvim
 function M.empty_map_table()
 	local maps = {}
 	for _, mode in ipairs({ "", "n", "v", "x" }) do
@@ -12,6 +17,7 @@ function M.empty_map_table()
 	return maps
 end
 
+-- copy from astronvim
 function M.set_mapping(map_table, base)
 	base = base or {}
 	for mode, maps in pairs(map_table) do

@@ -1,5 +1,6 @@
 return {
 	"williamboman/mason-lspconfig.nvim",
+    event = {"BufReadPre", "BufNewFile"},
 	dependencies = {
 		"mason.nvim",
 		"neovim/nvim-lspconfig",
@@ -15,6 +16,7 @@ return {
 			"lua_ls",
 			"serve_d",
 			"clangd",
+            "cmake",
 			-- "cssls",
 			-- "html",
 			-- "tsserver",
@@ -23,8 +25,8 @@ return {
 			"jsonls",
 			-- "yamlls",
 		}
-		local default = require("lsp")
-		local default_config = default.default_config
+		local lsp = require("utils.lsp")
+		local default_config = lsp.default_config
 		local servers_handlers = {}
 
 		for _, server in pairs(servers) do
@@ -38,8 +40,8 @@ return {
 				lspconfig[server].setup(vim.tbl_deep_extend("force", default_config(), conf_opts))
 			end
 		end
-        -- print(vim.inspect(vim.inspect(servers_handlers)))
-        -- print(vim.inspect(servers_handlers["lua_ls"]))
+		-- print(vim.inspect(vim.inspect(servers_handlers)))
+		-- print(vim.inspect(servers_handlers["lua_ls"]))
 		mason_lspconfig.setup({
 			ensure_installed = servers,
 			handlers = servers_handlers,

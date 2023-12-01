@@ -1,5 +1,6 @@
 return {
 	"nvim-telescope/telescope.nvim",
+	cmd = { "Telescope" },
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		"nvim-lua/popup.nvim",
@@ -86,5 +87,4 @@ return {
 			end
 		end
 	end,
-    cmd={"Telescope"}
 }

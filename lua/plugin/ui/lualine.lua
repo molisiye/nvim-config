@@ -24,7 +24,7 @@ local function lsp()
 		:totable()
 	local info = table.concat(clients, ", ")
 	if info == "" then
-		return "No attached LSP server"
+		return "No LSP"
 	else
 		return info
 	end
@@ -47,6 +47,7 @@ local opts = {
 	sections = {
 		lualine_c = {
 			lsp,
+            indent
 		},
 		lualine_x = {
 			recording,
@@ -59,6 +60,7 @@ local opts = {
 			"indent",
 			"encoding",
 			"fileformat",
+            ""
 		},
 	},
 	options = {

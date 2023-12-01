@@ -41,6 +41,7 @@ if status_ok then
 			["t"] = { name = "+toggle" },
 			["o"] = { name = "+org" },
 			["h"] = { name = "+helper" },
+            ["u"] = { name = "UI/UX"}
 		},
 	})
 end

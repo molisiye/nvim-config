@@ -1,5 +1,6 @@
 return {
 	"Bekaboo/dropbar.nvim",
+    event = {"BufReadPre", "BufNewFile"},
 	opts = {
 		general = {
 			enable = function(buf, win)

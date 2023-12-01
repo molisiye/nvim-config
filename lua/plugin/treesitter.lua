@@ -1,3 +1,4 @@
+---@diagnostic disable
 return {
 	"nvim-treesitter/nvim-treesitter",
 	event = "VeryLazy",
@@ -32,8 +33,7 @@ return {
 			},
 			indent = { enable = true },
 			autotag = { enable = true },
-			endwise = { enable = true },
-			context_commentstring = { enable = true },
+			endwise = { enable = true }
 		})
 	end,
 }
