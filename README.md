@@ -1,1 +1,1 @@
-my neovim config copy from neovim-from-scratch
+my personal neovim config. 

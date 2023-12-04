@@ -3,8 +3,8 @@ return {
 	settings = {
 
 		d = {
-      dcdClientPath = "/home/galaxy/.local/share/nvim/mason/packages/dcd-client",
-      dcdServerPath = "/home/galaxy/.local/share/nvim/mason/packages/dcd-server",
+      dcdClientPath = "~/.local/share/code-d/bin/dcd-client",
+      dcdServerPath = "~/.local/share/code-d/bin/dcd-server",
       enableFormatting = "true",
       servedReleaseChannel= "nightly",
       extraRoots = ".",
