@@ -4,48 +4,6 @@ local custome = require("custome")
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
-local status_ok, whichkey = pcall(require, "which-key")
-if status_ok then
-	whichkey.register({
-		["s"] = { name = "+hop" },
-		["["] = { name = "+prev" },
-		["]"] = { name = "+next" },
-		["g"] = { name = "+goto" },
-		["<leader>"] = {
-			name = "+<leader>",
-			["<leader>"] = { name = "+<localleader>" },
-			["f"] = {
-				name = "+find",
-				["d"] = { name = "+debug" },
-			},
-			["g"] = {
-				name = "+git",
-				["d"] = { name = "+diffview" },
-			},
-			["s"] = {
-				name = "+session",
-				["c"] = { name = "+current" },
-			},
-			["b"] = {
-				name = custome.prefer_tabpage and "+tab" or "+buffer",
-				["s"] = { name = "+sort" },
-			},
-			["l"] = {
-				name = "+lsp",
-				["w"] = { name = "+workspace" },
-			},
-			["i"] = { name = "+insert" },
-			["m"] = { name = "+manage" },
-			["r"] = { name = "+tasks" },
-			["d"] = { name = "+debug" },
-			["t"] = { name = "+toggle" },
-			["o"] = { name = "+org" },
-			["h"] = { name = "+helper" },
-            ["u"] = { name = "UI/UX"}
-		},
-	})
-end
-
 -- Modes
 --   normal_mode = "n",
 --   insert_mode = "i",
@@ -55,7 +13,7 @@ end
 --   command_mode = "c",
 
 -- Normal --
-keymap("n", "<leader>w", "<cmd>w<cr>", { desc = "Save" })
+keymap({ "n", "i", "x", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save" })
 keymap("n", "<leader>q", "<cmd>q<cr>", { desc = "Quit" })
 -- Better window navigation
 keymap("n", "<C-h>", "<C-w>h")
@@ -106,33 +64,43 @@ keymap("n", "<leader>mm", "<Cmd>Mason<CR>", { desc = "Packages" })
 keymap("n", "<leader>fb", function()
 	require("telescope.builtin").buffers()
 end, { desc = "Buffers" })
+
 keymap("n", "<leader>ff", function()
 	require("telescope.builtin").find_files()
 end, { desc = "Files" })
+
 keymap("n", "<leader>f?", function()
 	require("telescope.builtin").help_tags()
 end, { desc = "Help tags" })
+
 keymap("n", "<leader>fh", function()
 	require("telescope.builtin").oldfiles()
 end, { desc = "Old files" })
+
 keymap("n", "<leader>fm", function()
 	require("telescope.builtin").marks()
 end, { desc = "Marks" })
+
 keymap("n", "<leader>fs", function()
 	require("telescope.builtin").lsp_document_symbols()
 end, { desc = "Symbols" })
+
 keymap("n", "<leader>fS", function()
 	require("telescope.builtin").lsp_workspace_symbols()
 end, { desc = "Workspace symbols" })
+
 keymap("n", "<leader>fc", function()
 	require("telescope.builtin").colorscheme()
 end, { desc = "Colorscheme" })
+
 keymap("n", "<leader>fg", function()
 	require("telescope.builtin").extensions.live_grep_args.live_grep_args()
 end, { desc = "Live grep" })
+
 keymap("n", "<leader>fn", function()
 	require("telescope.builtin").extensions.notify.notify()
 end, { desc = "Notify" })
+
 keymap("n", "<leader>fW", function()
 	require("telescope.builtin").live_grep({
 		additional_args = function(args)
@@ -140,6 +108,7 @@ keymap("n", "<leader>fW", function()
 		end,
 	})
 end, { desc = "Find words in all files" })
+
 keymap("n", "<leader>fw", function()
 	require("telescope.builtin").live_grep()
 end, { desc = "Find words" })
@@ -159,39 +128,48 @@ end, { desc = "Format Document" })
 keymap("n", "<F5>", function()
 	require("dap").continue()
 end, { desc = "Debug: Continue" })
+
 keymap("n", "<F10>", function()
 	require("dap").step_over()
 end, { desc = "Debug: Step over" })
+
 keymap("n", "<F11>", function()
 	require("dap").step_into()
 end, { desc = "Debug: Step into" })
+
 keymap("n", "<F12>", function()
 	require("dap").step_out()
 end, { desc = "Debug: Step out" })
+
 keymap("n", "<F9>", function()
 	require("dap").toggle_breakpoint()
 end, { desc = "Debug: Toggle breakpoint" })
+
 keymap("n", "<leader>db", function()
 	require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: "))
 end, { desc = "Set breakpoint" })
+
 keymap("n", "<leader>dp", function()
 	require("dap").set_breakpoint(nil, nil, vim.fn.input("Log point message: "))
 end, { desc = "Set log point" })
+
 keymap("n", "<leader>dr", function()
 	require("dap").repl.toggle()
 end, { desc = "Toggle REPL" })
+
 keymap("n", "<leader>dl", function()
 	require("dap").run_last()
 end, { desc = "Run last" })
-
 
 -- dap-python
 keymap("n", "<leader>dn", function()
 	require("dap-python").test_method()
 end, { desc = "Test method" })
+
 keymap("n", "<leader>df", function()
 	require("dap-python").test_class()
 end, { desc = "Test class" })
+
 keymap("v", "<leader>ds", function()
 	require("dap-python").debug_selection()
 end, { desc = "Debug selection" })

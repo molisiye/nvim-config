@@ -2,7 +2,7 @@ return {
 	"Bekaboo/dropbar.nvim",
     event = {"BufReadPre", "BufNewFile"},
 	opts = {
-		general = {
+		bar = {
 			enable = function(buf, win)
 				return not vim.api.nvim_win_get_config(win).zindex
 					and vim.bo[buf].buftype == ""

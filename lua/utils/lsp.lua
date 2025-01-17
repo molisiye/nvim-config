@@ -27,9 +27,9 @@ M.default_config = function()
 			client.server_capabilities.documentRangeFormattingProvider = false
 
 			-- Enable inlay hints
-			if client and client.server_capabilities.inlayHintProvider then
-				vim.lsp.inlay_hint(bufnr, true)
-			end
+			-- if client and client.server_capabilities.inlayHintProvider then
+			--	vim.lsp.inlay_hint(bufnr, true)
+			--end
 			local lsp_mapping = require("util").empty_map_table()
 
 			lsp_mapping.n["gD"] = { "<cmd>lua vim.lsp.buf.declaration()<cr>", desc = "Declaration" }
