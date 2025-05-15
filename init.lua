@@ -17,6 +17,7 @@ end
 
 require("options")
 require("keymaps")
+require("core")
 require("setup")
 
 vim.cmd.colorscheme(custome.theme)

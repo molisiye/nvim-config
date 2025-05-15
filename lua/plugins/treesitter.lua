@@ -2,13 +2,7 @@
 return {
 	"nvim-treesitter/nvim-treesitter",
 	event = "VeryLazy",
-	dependencies = {
-		"JoosepAlviste/nvim-ts-context-commentstring",
-		"windwp/nvim-ts-autotag",
-		"RRethy/nvim-treesitter-endwise",
-	},
 	build = ":TSUpdate",
-
 	config = function()
 		require("nvim-treesitter.configs").setup({
 			ensure_installed = {
@@ -17,6 +11,7 @@ return {
 				"c",
 				"cpp",
 				"ruby",
+				"rust",
 				"javascript",
 				"json",
 				"lua",
@@ -33,7 +28,7 @@ return {
 			},
 			indent = { enable = true },
 			autotag = { enable = true },
-			endwise = { enable = true }
+			endwise = { enable = true },
 		})
 	end,
 }
