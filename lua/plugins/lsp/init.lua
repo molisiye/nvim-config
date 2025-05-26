@@ -17,6 +17,7 @@ return {
 				"serve_d",
 				"clangd",
 				"cmake",
+                "solargraph",
 				-- "cssls",
 				-- "html",
 				-- "tsserver",
