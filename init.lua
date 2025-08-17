@@ -1,4 +1,4 @@
-local custome = require("custome")
+local custom = require("config.custom")
 
 local lazypath = vim.env.LAZY or vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
 if not (vim.env.LAZY or (vim.uv or vim.loop).fs_stat(lazypath)) then
@@ -15,9 +15,12 @@ if not pcall(require, "lazy") then
   vim.cmd.quit()
 end
 
-require("options")
-require("keymaps")
-require("core")
-require("setup")
+require("config.utils")
+require("config.options")
+require("config.keymaps")
+require("config.autocmds")
+require("config.core")
+require("config.setup")
+require("lsp")
 
-vim.cmd.colorscheme(custome.theme)
+vim.cmd.colorscheme(custom.theme)

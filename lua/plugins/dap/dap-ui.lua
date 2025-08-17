@@ -1,4 +1,4 @@
-local custome = require("custome")
+local custom = require("config.custom")
 
 return {
 	"rcarriga/nvim-dap-ui",
@@ -41,7 +41,7 @@ return {
 		element_mappings = {},
 		expand_lines = true,
 		floating = {
-			border = custome.border,
+			border = custom.border,
 			mappings = {
 				close = { "q", "<Esc>" },
 			},

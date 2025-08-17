@@ -1,5 +1,4 @@
-local keymap = require("util").keymap
-local custome = require("custome")
+local keymap = utils.keymap
 
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
@@ -103,9 +102,7 @@ end, { desc = "Notify" })
 
 keymap("n", "<leader>fW", function()
 	require("telescope.builtin").live_grep({
-		additional_args = function(args)
-			return vim.list_extend(args, { "--hidden", "--no-ignore" })
-		end,
+		additional_args = { "--hidden", "--no-ignore" }
 	})
 end, { desc = "Find words in all files" })
 
@@ -124,9 +121,25 @@ keymap("n", "<leader>F", function()
 	require("conform").format({ lsp_fallback = true })
 end, { desc = "Format Document" })
 
+-- diagnostic
+local diagnostic_goto = function(next, severity)
+  local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
+  severity = severity and vim.diagnostic.severity[severity] or nil
+  return function()
+    go({ severity = severity })
+  end
+end
+keymap("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
+keymap("n", "]d", diagnostic_goto(true), { desc = "Next Diagnostic" })
+keymap("n", "[d", diagnostic_goto(false), { desc = "Prev Diagnostic" })
+keymap("n", "]e", diagnostic_goto(true, "ERROR"), { desc = "Next Error" })
+keymap("n", "[e", diagnostic_goto(false, "ERROR"), { desc = "Prev Error" })
+keymap("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Next Warning" })
+keymap("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
+
 -- dap
 keymap("n", "<F5>", function()
-	require("dap").continue()
+	require("dap").continue() 
 end, { desc = "Debug: Continue" })
 
 keymap("n", "<F10>", function()

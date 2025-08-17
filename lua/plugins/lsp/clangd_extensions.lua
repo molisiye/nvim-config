@@ -1,5 +1,5 @@
 ---@diagnostic disable: missing-fields
-local custome = require("custome")
+local custom = require("config.custom")
 
 return {
 	"p00f/clangd_extensions.nvim",
@@ -10,10 +10,10 @@ return {
 	config = function()
 		require("clangd_extensions").setup({
 			memory_usage = {
-				border = custome.border,
+				border = custom.border,
 			},
 			symbol_info = {
-				border = custome.border,
+				border = custom.border,
 			},
 		})
 

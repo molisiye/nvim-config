@@ -1,22 +1,17 @@
 return {
 	-- lsp for cargo.toml
-	{
-		"Saecki/crates.nvim",
-		event = { "BufRead Cargo.toml" },
-		opts = {
-			completion = {
-				crates = {
-					enabled = true,
-				},
-			},
-			lsp = {
-				enabled = true,
-				actions = true,
-				completion = true,
-				hover = true,
-			},
-		},
-	},
+	-- {
+	-- 	"Saecki/crates.nvim",
+	-- 	event = { "BufRead Cargo.toml" },
+	-- 	opts = {
+	-- 		completion = {
+	-- 			crates = {
+	-- 				enabled = true,
+	-- 			},
+	-- 		},
+	--            lsp = {enabled = false}
+	-- 	}
+	-- },
 	{
 		"mrcjkb/rustaceanvim",
 		version = vim.fn.has("nvim-0.10.0") == 0 and "^4" or false,
@@ -47,13 +42,13 @@ return {
 						diagnostics = {
 							enable = true,
 						},
-                        inlayHints = {
-                            bindingModeHints = {eanble = true},
-                            lifetimeElisionHints = {
-                                enable = true,
-                                useParameterNames = true
-                            }
-                        },
+						inlayHints = {
+							bindingModeHints = { eanble = true },
+							lifetimeElisionHints = {
+								enable = true,
+								useParameterNames = true,
+							},
+						},
 						procMacro = {
 							enable = true,
 							ignored = {
@@ -75,16 +70,14 @@ return {
 								".venv",
 							},
 						},
-                        standalone = true,
-                        cmd = {"rustup", "run", "stable", "rust-analyzer"}
 					},
 				},
 			},
 		},
 		config = function(_, opts)
 			-- if LazyVim.has("mason.nvim") then
-			local package_path = require("mason-registry").get_package("codelldb"):get_install_path()
-			local codelldb = package_path .. "/extension/adapter/codelldb"
+			local package_path =utils.get_install_path("codelldb")
+            local codelldb = package_path .. "/extension/adapter/codelldb"
 			local library_path = package_path .. "/extension/lldb/lib/liblldb.dylib"
 			local uname = io.popen("uname"):read("*l")
 			if uname == "Linux" then
@@ -109,8 +102,11 @@ return {
 		cmd = "LazyDev",
 		opts = {
 			library = {
+				{ path = "luvit-meta/library", words = { "vim%.uv" } },
 				{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
-				{ path = "lazy.nvim", words = { "Lazy.*Spec", "LazyVim" } },
+				{ path = "LazyVim", words = { "LazyVim" } },
+				{ path = "snacks.nvim", words = { "Snacks" } },
+				{ path = "lazy.nvim", words = { "LazyVim" } },
 			},
 			-- enabled = function(root_dir)
 			-- 	if vim.g.lazydev_enabled == false then

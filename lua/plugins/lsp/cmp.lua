@@ -1,4 +1,4 @@
-local custome = require("custome")
+local custom = require("config.custom")
 return {
 	"hrsh7th/nvim-cmp",
 	dependencies = {
@@ -30,7 +30,7 @@ return {
 		cmp.setup({
 			window = {
 				completion = {
-					border = custome.border,
+					border = custom.border,
 					col_offset = -3,
 				},
                 documentation = cmp.config.window.bordered()
